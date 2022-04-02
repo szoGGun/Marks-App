@@ -14,7 +14,6 @@
     <name>Student-Management-System-App</name>
     <description>Student-Management-System-App</description>
     <properties>
-        <java.version>11</java.version>
     </properties>
     <dependencies>
         <dependency>
