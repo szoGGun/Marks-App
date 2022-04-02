@@ -1,6 +1,5 @@
 package com.przemyslawrutkowski.sms;
 
-import com.przemyslawrutkowski.sms.entity.Student;
 import com.przemyslawrutkowski.sms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,14 +18,14 @@ public class StudentManagementSystemAppApplication implements CommandLineRunner 
     @Override
     public void run(String... args) throws Exception {
 
-        Student student1 = new Student("Przemysław", "Rutkowski", "przrut4@gmail.com" );
-        studentRepository.save(student1);
-
-        Student student2 = new Student("Joe", "Doe", "joedoe@gmail.com" );
-        studentRepository.save(student2);
-
-
-        Student student3 = new Student("Tony", "Stark", "ironaman@avengers.com" );
-        studentRepository.save(student3);
+//        Student student1 = new Student("Przemysław", "Rutkowski", "przrut4@gmail.com" );
+//        studentRepository.save(student1);
+//
+//        Student student2 = new Student("Joe", "Doe", "joedoe@gmail.com" );
+//        studentRepository.save(student2);
+//
+//
+//        Student student3 = new Student("Tony", "Stark", "ironaman@avengers.com" );
+//        studentRepository.save(student3);
     }
 }
