@@ -1,5 +1,9 @@
 package com.przemyslawrutkowski.sms.service;
 
-public interface StudentService{
+import com.przemyslawrutkowski.sms.entity.Student;
 
+import java.util.List;
+
+public interface StudentService{
+    List<Student> getAllStudents();
 }
