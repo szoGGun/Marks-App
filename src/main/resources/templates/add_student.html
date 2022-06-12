@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head id="headId">
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menuFragment}"/>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7 col-md-7 col-sm-7 container justify-content-center card">
+            <div class="card-body">
+
+                <form th:action="@{add_student}" th:object="${student}" method="post">
+                    <p>&nbsp;</p>
+                    <H5 th:if="*{id != null}" align="center">Edit Student:</H5>
+
+                    <H5 th:if="*{id == null}" align="center">Add Student:</H5>
+                    <p>&nbsp<br></p>
+
+                    <div align="center" class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('all')}">
+                        <h5>Error. Wrong data format:</h5>
+                        <i th:errors="*{all}">Incorrect date</i>
+                    </div>
+                    <p>&nbsp<br></p>
+
+                    <div th:if="*{id != null}" class="form-group row">
+                        <label for="inputId" class="col-sm-2 col-form-label">Student id</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputId" th:field="*{id}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputName" th:field="*{name}"
+                                   th:errorclass="'form-control is-invalid'">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputSurname" class="col-sm-2 col-form-label">Surname</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputSurname" th:field="*{surname}"
+                                   th:errorclass="'form-control is-invalid'">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputEmail" th:field="*{email}"
+                                   th:errorclass="'form-control is-invalid'">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputMajor" class="col-sm-2 col-form-label">Major</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputMajor" th:field="*{major}"
+                                   th:errorclass="'form-control is-invalid'">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="inputYear" class="col-sm-2 col-form-label">Year</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputYear" th:field="*{studentYear}"
+                                   th:errorclass="'form-control is-invalid'">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputGroup" class="col-sm-2 col-form-label">Group</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="inputGroup" th:field="*{studentGroup}"
+                                   th:errorclass="'form-control is-invalid'">
+                        </div>
+                    </div>
+
+                    <div align="center">
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                        <input type="reset" class="btn btn-danger" value="Reset">
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

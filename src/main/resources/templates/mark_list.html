@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head id="headId">
+    <meta charset="UTF-8">
+    <title>Student</title>
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menuFragment}"/>
+<br>
+<br>
+
+<div class="container">
+    <div class="row">
+        <h1>Marks list:</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <a id="addNewMark" class="btn btn-primary btn-sm mb-3" role="button" aria-pressed="true">Add Mark</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Mark Description</th>
+                <th scope="col">Mark</th>
+                <th sec:authorize="hasAnyRole('ROLE_ADMIN')" scope="col"></th>
+                <th sec:authorize="hasAnyRole('ROLE_ADMIN')" scope="col"></th>
+                <th sec:authorize="hasAnyRole('ROLE_ADMIN')" scope="col"></th>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input id="studentFilter" type="text" name="student" value=""></td>
+                <td><input id="markDescriptionFilter" type="text" name="markDescription" value=""></td>
+                <td></td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN')"></td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN')"></td>
+                <td sec:authorize="hasAnyRole('ROLE_ADMIN')"></td>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+        <nav aria-label="...">
+            <ul id="page-links" class="pagination pagination-sm">
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<script>
+    let markDescriptionFilter = document.getElementById("markDescriptionFilter");
+    let studentFilter = document.getElementById("studentFilter");
+
+
+    window.onload = function () {
+        loadDoc();
+    }
+    markDescriptionFilter.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        filter()
+    });
+
+    studentFilter.addEventListener("keyup", function (event) {
+        event.preventDefault();
+        filter()
+    });
+
+    function filter() {
+        const markDescription = markDescriptionFilter.value;
+        const student = studentFilter.value;
+        loadDoc(markDescription, student)
+    }
+
+    function loadDoc(markDescription, student, pageNumber) {
+
+        if (markDescription == null) {
+            markDescription = "";
+        }
+        if (student == null) {
+            student = "";
+        }
+
+        if (pageNumber == null) {
+            pageNumber = 1;
+        }
+
+        get(`/marks/findMarks?markDescription=${markDescription}&student=${student}&pageNumber=${pageNumber}`, function (err, response) {
+            if (err != null) {
+                console.error(err);
+            } else {
+                buildTable(response.content);
+                pageLinks(response, pageNumber);
+
+            }
+        });
+    }
+
+    function buildTable(array) {
+        let tbody = document.createElement("tbody");
+        tbody.id = "tbody";
+
+        for (const element of array) {
+            var row = document.createElement("tr");
+            addTextCell(element.id, row);
+            addTextCell(element.student.name + " " + element.student.surname, row);
+            addTextCell(element.markDescription, row);
+            addTextCell(element.markValue, row);
+            addLinkCell('View Details', `view_mark?id=${element.id}`, row);
+            addLinkCell('Edit', `edit_mark?id=${element.id}`, row);
+            addLinkCell('Delete', `delete_mark?id=${element.id}`, row);
+            tbody.appendChild(row);
+        }
+        document.getElementById("tbody").replaceWith(tbody);
+    }
+
+    function addTextCell(cellContent, row) {
+        let cell = document.createElement("td");
+        cell.appendChild(document.createTextNode(cellContent));
+        row.appendChild(cell);
+    }
+
+    function addLinkCell(buttonName, link, row) {
+        let cell = document.createElement("td");
+        cell.setAttribute("align", "center")
+        let a = document.createElement("a");
+        a.appendChild(document.createTextNode(buttonName))
+        a.title = buttonName
+        a.href = link
+        a.className = "btn btn-primary btn-sm";
+        if(buttonName == "Delete"){
+        a.setAttribute("class", "btn btn-danger btn-sm")
+        } else {
+        a.setAttribute("class", "btn btn-primary btn-sm")
+        }
+        a.setAttribute("role", "button")
+        a.setAttribute("aria-pressed", "true")
+        cell.appendChild(a);
+        row.appendChild(cell);
+        return row;
+    }
+
+
+    function pageLinks(data, pageNumber) {
+
+        let pageLinks = document.createElement("ul");
+        pageLinks.id = "page-links";
+        pageLinks.className = "pagination pagination-sm";
+
+        for (let i = 1; i <= data.totalPages; i++) {
+            let li = document.createElement("li");
+            if(i === pageNumber) {
+                li.className = "page-item active";
+            } else {
+                li.className = "page-item";
+            }
+            let a = document.createElement("a");
+            a.appendChild(document.createTextNode(i))
+            a.className = "page-link";
+            a.onclick = function () {
+                loadDoc(markDescriptionFilter.value, studentFilter.value, i)
+            }
+            a.title = i
+            li.appendChild(a);
+            pageLinks.appendChild(li);
+        }
+        document.getElementById("page-links").replaceWith(pageLinks);
+    }
+
+
+    function get(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = function () {
+            var status = xhr.status;
+            if (status === 200) {
+                callback(null, xhr.response);
+            } else {
+                callback(status, xhr.response);
+            }
+        };
+        xhr.send();
+    }
+
+
+
+</script>
+</body>
+</html>

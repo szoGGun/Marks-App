@@ -1,0 +1,12 @@
+<thlogic>
+    <attr sel="#headId"
+          th:replace="~{fragments/head :: headFragment}"/>
+    <attr sel="#footerId"
+          th:replace="~{fragments/footer :: footerFragment}"/>
+    <attr sel="#home"
+          th:href="${home}"
+          th:with="home=${T(org.przemekrutkowski.exammarksapp.util.Mappings).HOME}"/>
+    <attr sel="#studentListId"
+          th:href="${studentList}"
+          th:with="studentList=${T(org.przemekrutkowski.exammarksapp.util.Mappings).STUDENTS_LIST}"/>
+</thlogic>

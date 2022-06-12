@@ -1,0 +1,19 @@
+<thlogic>
+    <attr sel="#headId"
+          th:replace="~{fragments/head :: headFragment}"/>
+    <attr sel="#addNewMark"
+          th:href="${addMark}"
+          th:with="addMark=${T(org.przemekrutkowski.exammarksapp.util.Mappings).ADD_MARK}"/>
+    <attr sel="#deleteMark"
+          th:href="${deleteMark}+'?id='+${mark.id}"
+          th:with="deleteMark=${T(org.przemekrutkowski.exammarksapp.util.Mappings).DELETE_MARK}"/>
+    <attr sel="#editMark"
+          th:href="${editMark}+'?id='+${mark.id}"
+          th:with="editMark=${T(org.przemekrutkowski.exammarksapp.util.Mappings).EDIT_MARK}"/>
+    <attr sel="#home"
+          th:href="${home}"
+          th:with="home=${T(org.przemekrutkowski.exammarksapp.util.Mappings).HOME}"/>
+    <attr sel="#viewMark"
+          th:href="${viewMark}+'?id='+${mark.id}"
+          th:with="viewMark=${T(org.przemekrutkowski.exammarksapp.util.Mappings).VIEW_MARK}"/>
+</thlogic>

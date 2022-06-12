@@ -1,0 +1,7 @@
+<thlogic>
+    <attr sel="#headId"
+          th:replace="~{fragments/head :: headFragment}"/>
+    <attr sel="#homeId"
+          th:href="${login}"
+          th:with="login=${T(org.przemekrutkowski.exammarksapp.util.Mappings).LOGIN}"/>
+</thlogic>

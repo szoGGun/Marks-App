@@ -1,0 +1,20 @@
+<thlogic>
+    <attr sel="#headId"
+          th:replace="~{fragments/head :: headFragment}"/>
+    <attr sel="#studentId"
+          th:href="${viewStudent}+'?id='+${student.id}"
+          th:with="viewStudent=${T(org.przemekrutkowski.exammarksapp.util.Mappings).VIEW_STUDENT}"/>
+    <attr sel="#addStudentId"
+          th:href="${addStudent}"
+          th:with="addStudent=${T(org.przemekrutkowski.exammarksapp.util.Mappings).ADD_STUDENT}"/>
+    <attr sel="#deleteStudentId"
+          th:href="${deleteStudent}+'?id='+${student.id}"
+          th:with="deleteStudent=${T(org.przemekrutkowski.exammarksapp.util.Mappings).DELETE_STUDENT}"/>
+    <attr sel="#editStudentId"
+          th:href="${editStudent}+'?id='+${student.id}"
+          th:with="editStudent=${T(org.przemekrutkowski.exammarksapp.util.Mappings).EDIT_STUDENT}"/>
+          th:href="@{__${T(org.przemekrutkowski.exammarksapp.util.Mappings).EDIT_STUDENT}__+'?id='+${student.id}}"/>
+    <attr sel="#home"
+          th:href="${home}"
+          th:with="home=${T(org.przemekrutkowski.exammarksapp.util.Mappings).HOME}"/>
+</thlogic>
