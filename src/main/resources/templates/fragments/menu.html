@@ -14,29 +14,33 @@
                        th:href="${home}"
                        th:with="home=${T(org.przemekrutkowski.exammarksapp.util.Mappings).HOME}">Home Page</a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                    <a class="nav-link"
-                       th:href="${studentsList}"
-                       th:with="studentsList=${T(org.przemekrutkowski.exammarksapp.util.Mappings).STUDENTS_LIST}">Students</a>
-                </li>
-                <li class="nav-item">
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="nav-item">
                     <a class="nav-link"
                        th:href="${markList}"
                        th:with="markList=${T(org.przemekrutkowski.exammarksapp.util.Mappings).MARKS_LIST}">Marks</a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item dropdown">
+                <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                    <a class="nav-link"
+                       th:href="${studentsList}"
+                       th:with="studentsList=${T(org.przemekrutkowski.exammarksapp.util.Mappings).STUDENTS_LIST}">Students List</a>
+                </li>
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="password_change">Password change</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="user_administration">User Administration</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')"  class="dropdown-item" href="user_administration">User Administration</a>
                     </div>
                 </li>
-                <li class="nav-item">
+                <li sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="nav-item">
                     <a class="nav-link"
                        th:href="${logout}"
                        th:with="logout=${T(org.przemekrutkowski.exammarksapp.util.Mappings).LOGOUT}">Logout</a>
+                </li>
+                <li sec:authorize="!hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" class="nav-item">
+                    <a class="nav-link"
+                       th:href="${login}"
+                       th:with="login=${T(org.przemekrutkowski.exammarksapp.util.Mappings).LOGIN}">Login</a>
                 </li>
             </ul>
         </div>

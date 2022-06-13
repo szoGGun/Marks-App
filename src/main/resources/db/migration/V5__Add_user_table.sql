@@ -8,6 +8,6 @@ create table users
     password varchar(500)
 );
 
-insert into users (user_name, first_name, last_name, user_role, password) values ('admin', 'John', 'Doe', 'ADMIN', '{bcrypt}$2a$12$rvC3VtPFdeubVO0pOeMBa.yYdygRBm2NT.lK7y4PC2FI4Mu88FLIK');
+insert into users (user_name, first_name, last_name, user_role, password) values ('teacher', 'John', 'Doe', 'ADMIN', '{bcrypt}$2a$12$rvC3VtPFdeubVO0pOeMBa.yYdygRBm2NT.lK7y4PC2FI4Mu88FLIK');
 
 insert into users (user_name, first_name, last_name, user_role, password) values ('student', 'James', 'Smith', 'USER', '{bcrypt}$2a$12$feoSS.Dx/rRdQWfWHeWYZu8txsYcy8Dxt89MWd9U3O8r4CaAKKY3S');
