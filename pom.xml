@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.przemekrutkowski</groupId>
 	<artifactId>marks</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>marks</name>
 	<description>Marks selection card</description>
@@ -18,7 +18,7 @@
 	<properties>
 		<java.version>18</java.version>
 		<xhtml.render.version>9.1.20</xhtml.render.version>
-		<maven.compiler.target>15</maven.compiler.target>
+		<maven.compiler.target>18</maven.compiler.target>
 	</properties>
 
 	<dependencies>
